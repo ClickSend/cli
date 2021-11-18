@@ -1,0 +1,24 @@
+{
+  "name": "cs",
+  "version": "0.0.1",
+  "description": "ClickSend CLI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ClickSend/cli.git"
+  },
+  "keywords": [
+    "CLI",
+    "Command",
+    "Line"
+  ],
+  "author": "Michael Riecken",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ClickSend/cli/issues"
+  },
+  "homepage": "https://github.com/ClickSend/cli#readme"
+}
