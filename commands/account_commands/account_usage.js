@@ -1,3 +1,4 @@
+const yargs = require('yargs');
 const cs = require( './../../modules/clicksend.js')
 
 /**
@@ -27,7 +28,10 @@ exports.builder = function(yargs){
     })
 }
 
-exports.handler = function(argv) {
-    cs.debug(  'Creating account for %s', argv.firstName, yargs )
+exports.handler = async function(yargs) {
+    var path = '/v3/account/usage/' + yargs.year + '/' + yargs.month + '/subaccount';
+    var result = await cs.executeGet( path, yargs );
+    cs.output( result, yargs );
+    return result;
 }
 
