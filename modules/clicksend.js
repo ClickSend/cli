@@ -69,7 +69,12 @@ async function executePostJSON( path, content, yargs ) {
 }
 
 async function executePost( path, contentType, content, yargs ) {
+    if( yargs.debug > 2 ) {
+        console.log( "Sending POST to " + yargs.host + yargs.path );
+    }
+
     var basic = getBasic(getCSCredentials(yargs));
+
     var P = new Promise((resolve, reject) => {
         var options = {
             'method': 'POST',
@@ -101,12 +106,18 @@ async function executePost( path, contentType, content, yargs ) {
                 reject(error);
             });
         });
+
+        if( yargs.debug > 3 ) {
+            console.log( "POST Options : " );
+            console.log( options );
+            console.log( "\nPOST Payload :" );
+            console.log( content );
+        }
+
         req.write(content);
         req.end();
     })
-
     return P;
-
 }
 
 module.exports = { executeGet, executePost, executePostJSON }

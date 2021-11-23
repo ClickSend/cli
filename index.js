@@ -45,17 +45,12 @@ require('yargs/yargs')(hideBin(process.argv))
     type : 'string',
     group: 'ClickSend Connection Options:'
   })
-  
-  .option('verbose', {
-    alias: 'V',
-    describe: 'Verbose output.',
-    type: 'boolean',
-    group: 'Debugging:'
-  })
+
   .option('debug', {
     alias: 'D',
-    describe: 'Provide debugging output to the console.',
-    type: 'boolean',
+    describe: 'Debugging level from 0 (default) to 5.  Where 0 is "off" and 5 is every possible message.',
+    type: 'number',
+    default : 0,
     group: 'Debugging:'
   })
   .help()
