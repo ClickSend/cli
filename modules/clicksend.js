@@ -155,7 +155,7 @@ function output( obj, yargs ) {
 }
 
 function debug( level, message, yargs ) {
-    if( level >= yargs.debug ) {
+    if( level <= yargs.debug ) {
         console.debug( message );
     }
 }
