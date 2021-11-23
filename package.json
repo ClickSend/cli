@@ -20,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/ClickSend/cli/issues"
   },
-  "homepage": "https://github.com/ClickSend/cli#readme"
+  "homepage": "https://github.com/ClickSend/cli#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "follow-redirects": "^1.14.5",
+    "yargs": "^17.2.1"
+  }
 }
