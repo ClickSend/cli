@@ -233,7 +233,7 @@ clicksend
         get
         create
 
-    timezones
+    timezones - DONE
     
     
 
