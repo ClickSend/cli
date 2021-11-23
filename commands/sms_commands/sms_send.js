@@ -23,7 +23,7 @@ exports.builder = function (yargs) {
             describe: 'Your sender ID',
             type: 'string',
             requiresArg: true,
-            demandOption: true,
+            demandOption: false,
             group: 'SMS Send Options:'
         })
         .option('body', {
@@ -60,6 +60,6 @@ exports.handler = async function (yargs) {
     }
 
     const result = await cs.executePostJSON('/v3/sms/send', payload, yargs);
-    console.log( result );
+    cs.output( result, yargs );
     return result;
 }

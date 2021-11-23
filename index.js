@@ -33,6 +33,7 @@ require('yargs/yargs')(hideBin(process.argv))
     group: 'ClickSend Connection Options:'
   })
   .option('cstoken', {
+    alias : ['cspassword', 'cspwd'],
     describe: 'Your access token you generated for this tool. If not provided through the command line, the tool will attempt to read this value from the environment varialble CLICKSEND_TOKEN.',
     requiresArg: true,
     demandOption: false,
@@ -51,7 +52,28 @@ require('yargs/yargs')(hideBin(process.argv))
     describe: 'Debugging level from 0 (default) to 5.  Where 0 is "off" and 5 is every possible message.',
     type: 'number',
     default : 0,
-    group: 'Debugging:'
+    group: 'Debug Options:'
+  })
+  .option( 'output', {
+    alias : 'O',
+    describe : 'How the output from this command will be sent.',
+    type : 'array',
+    default : 'console',
+    choices : [ 'console', 'file', 'none', 'debug', 'error' ],
+    group: 'Output Options:'
+  })
+  .option( 'format', {
+    alias : 'F',
+    desc : 'How to format the output',
+    default : 'pretty',
+    choices : ['pretty', 'raw', 'object' ],
+    group: 'Output Options:'
+  })
+  .option( 'fileName', {
+    alias : 'FN',
+    desc : 'When writing output to a file, this is the required file name.',
+    default : 'clicksend.json',
+    group : 'Output Options:'
   })
   .help()
   .parse()

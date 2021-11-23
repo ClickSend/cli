@@ -91,6 +91,6 @@ exports.handler = async function (yargs) {
     }
 
     const result = await cs.executePostJSON('/v3/account', payload, yargs);
-    console.log( result );
+    cs.output( result, yargs );
     return result;
 }

@@ -1,4 +1,5 @@
 const https = require('follow-redirects').https;
+const fs = require('fs');
 
 function getBasic(credentials) {
     var mix = credentials.username + ":" + credentials.token;
@@ -69,9 +70,8 @@ async function executePostJSON( path, content, yargs ) {
 }
 
 async function executePost( path, contentType, content, yargs ) {
-    if( yargs.debug > 2 ) {
-        console.log( "Sending POST to " + yargs.host + yargs.path );
-    }
+
+    debug( 4, "Sending POST to " + yargs.host + yargs.path, yargs );
 
     var basic = getBasic(getCSCredentials(yargs));
 
@@ -107,12 +107,10 @@ async function executePost( path, contentType, content, yargs ) {
             });
         });
 
-        if( yargs.debug > 3 ) {
-            console.log( "POST Options : " );
-            console.log( options );
-            console.log( "\nPOST Payload :" );
-            console.log( content );
-        }
+        debug( 5, "POST Options : ", yargs );
+        debug( 5, options, yargs );
+        debug( 5, "\nPOST Payload :", yargs );
+        debug( 5,  content, yargs );
 
         req.write(content);
         req.end();
@@ -120,4 +118,46 @@ async function executePost( path, contentType, content, yargs ) {
     return P;
 }
 
-module.exports = { executeGet, executePost, executePostJSON }
+function output( obj, yargs ) {
+    var formatted = undefined;
+
+    // format choices : ['pretty', 'raw', 'object' ],
+    if( yargs.format === 'pretty' ) {
+        formatted = JSON.stringify( obj, null, '\t');
+    }
+    else if( yargs.format === 'raw' ) {
+        formatted = JSON.stringify( obj );
+    }
+    // Probably wrong - as it truncates data, but it makes for pretty output to console.
+    else {
+        formatted = obj;
+    }
+    
+
+    if( yargs.output.includes( 'console' ) ) {
+        console.log( formatted );
+    }
+    if( yargs.output.includes( 'debug' ) ) {
+        console.debug( formatted );
+    }
+    if( yargs.output.includes( 'error' ) ) {
+        console.error( formatted );
+    }
+    if( yargs.output.includes( 'file' ) ) {
+        var fileName = yargs.fileName
+        fs.writeFile( fileName, formatted.toString(), err => {
+            if( err){
+                console.error(err);
+                return;
+            }
+        })
+    }
+}
+
+function debug( level, message, yargs ) {
+    if( level >= yargs.debug ) {
+        console.debug( message );
+    }
+}
+
+module.exports = { executeGet, executePost, executePostJSON, output, debug }
