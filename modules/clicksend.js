@@ -64,13 +64,13 @@ async function executeGet(path, yargs) {
 }
 
 async function executePostJSON( path, content, yargs ) {
-    return await executePost( path, 'applicaiton/json', content, yargs );
+    const data = JSON.stringify(content)
+    return await executePost( path, 'applicaiton/json', data, yargs );
 }
 
 async function executePost( path, contentType, content, yargs ) {
     var basic = getBasic(getCSCredentials(yargs));
     var P = new Promise((resolve, reject) => {
-        const data = JSON.stringify( content );
         var options = {
             'method': 'POST',
             'hostname': yargs.cshost,
@@ -79,7 +79,7 @@ async function executePost( path, contentType, content, yargs ) {
                 'Authorization': 'Basic ' + basic,
                 'Accept': 'application/json',
                 'Content-Type': contentType,
-                'Content-Length': Buffer.byteLength(data)
+                'Content-Length': Buffer.byteLength(content)
             },
             'maxRedirects': 20
         };
@@ -101,7 +101,7 @@ async function executePost( path, contentType, content, yargs ) {
                 reject(error);
             });
         });
-        req.write(data);
+        req.write(content);
         req.end();
     })
 
@@ -109,4 +109,4 @@ async function executePost( path, contentType, content, yargs ) {
 
 }
 
-module.exports = { executeGet, executePost }
+module.exports = { executeGet, executePost, executePostJSON }

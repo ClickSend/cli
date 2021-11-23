@@ -11,9 +11,6 @@ async function accountCommand(args) {
 
 exports.command = 'details';
 exports.desc = "Get account Get account details.";
-exports.handler = function( argv ) {
-    console.log( 'woopdie doo');
-}
 
 exports.builder = {}
 
