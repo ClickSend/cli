@@ -17,7 +17,7 @@ clicksend
             recharge
                 get
                 purchase
-        transactions
+        transaction
         subaccount
             get
             create
@@ -44,8 +44,7 @@ clicksend
             dedupe
             upload
             search (different api)
-        
-    countries
+    countries - DONE
     email
         tosms
             allowed (email addresses)
@@ -113,7 +112,6 @@ clicksend
             create
             update
             delete
-        
     mms
         send
         calculate
@@ -128,11 +126,9 @@ clicksend
             get
                 -- All
                 -- One
-
     number
         get
         buy
-
     post
         letter
             send
@@ -151,18 +147,14 @@ clicksend
                 create
                 update
                 delete
-    
     referral
         get
-    
     reseller
         client
             get
             create
             update
             transfer
-        
-
     sms
         send
         calculate
@@ -208,14 +200,11 @@ clicksend
             create
             get
             update
-            delete
-        
+            delete 
     voice
         stats
-    
     media
         upload
-        
     voice
         send
         calculate
@@ -232,7 +221,6 @@ clicksend
     issues
         get
         create
-
     timezones - DONE
     
     

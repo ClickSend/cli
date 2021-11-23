@@ -1,11 +1,11 @@
-const cs = require( './../../modules/clicksend.js')
+const cs = require( '../../modules/clicksend.js')
 
 /**
  ** Exports for the command line processor
  **/
 
-exports.command = 'details';
-exports.desc = "Get account Get account details.";
+exports.command = 'get';
+exports.desc = "Get account details.";
 
 exports.builder = {}
 
@@ -14,4 +14,3 @@ exports.handler = async function(yargs) {
     cs.output( result, yargs );
     return result;
 }
-
