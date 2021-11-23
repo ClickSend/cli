@@ -39,6 +39,12 @@ require('yargs/yargs')(hideBin(process.argv))
     type: 'string',
     group: 'ClickSend Connection Options:'
   })
+  .option('cshost', {
+    desc : 'The ClickSend host to which you wish to connect.',
+    default : 'rest.clicksend.com',
+    type : 'string',
+    group: 'ClickSend Connection Options:'
+  })
   
   .option('verbose', {
     alias: 'V',

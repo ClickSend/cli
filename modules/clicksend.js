@@ -2,7 +2,9 @@ const https = require('follow-redirects').https;
 
 function getBasic(credentials) {
     var mix = credentials.username + ":" + credentials.token;
-    return Buffer.from(mix).toString('base64');
+    var result =  Buffer.from(mix).toString('base64');
+
+    return result;
 }
 
 function getCSCredentials(yargs) {
@@ -25,13 +27,10 @@ function getCSCredentials(yargs) {
 
 async function executeGet(path, yargs) {
     var basic = getBasic(getCSCredentials(yargs));
-    if( yargs.debug ) {
-        console.debug( 'Basic Auth: ' + basic );
-    }
     var P = new Promise((resolve, reject) => {
         var options = {
             'method': 'GET',
-            'hostname': 'rest.clicksend.com',
+            'hostname': yargs.cshost,
             'path': path,
             'headers': {
                 'Authorization': 'Basic ' + basic,
@@ -64,4 +63,50 @@ async function executeGet(path, yargs) {
     return P;
 }
 
-module.exports = { executeGet }
+async function executePostJSON( path, content, yargs ) {
+    return await executePost( path, 'applicaiton/json', content, yargs );
+}
+
+async function executePost( path, contentType, content, yargs ) {
+    var basic = getBasic(getCSCredentials(yargs));
+    var P = new Promise((resolve, reject) => {
+        const data = JSON.stringify( content );
+        var options = {
+            'method': 'POST',
+            'hostname': yargs.cshost,
+            'path': path,
+            'headers': {
+                'Authorization': 'Basic ' + basic,
+                'Accept': 'application/json',
+                'Content-Type': contentType,
+                'Content-Length': Buffer.byteLength(data)
+            },
+            'maxRedirects': 20
+        };
+
+        var req = https.request(options, function (res) {
+            var chunks = [];
+
+            res.on("data", function (chunk) {
+                chunks.push(chunk);
+            });
+
+            res.on("end", function (chunk) {
+                var body = Buffer.concat(chunks).toString();;
+                var j = JSON.parse(body)
+                resolve(j);
+            });
+
+            res.on("error", function (error) {
+                reject(error);
+            });
+        });
+        req.write(data);
+        req.end();
+    })
+
+    return P;
+
+}
+
+module.exports = { executeGet, executePost }
