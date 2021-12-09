@@ -14,7 +14,7 @@ const { hideBin } = require('yargs/helpers')
  */
 
 
-require('yargs/yargs')(hideBin(process.argv))
+const yargs = require('yargs/yargs')(hideBin(process.argv))
   .scriptName("clicksend")
   .commandDir('commands')
   .usage(
@@ -23,25 +23,27 @@ require('yargs/yargs')(hideBin(process.argv))
     + '\n'
     + '\n'
     + chalk.bold('Usage: $0 <command> [options]'
+    + '\n'
+    + '\n'
+    + 'To get help on a specific command, use \'clicksend <command> --help\'\n'
     ))
   .demandCommand()
   .option('csuser', {
-    describe: 'Your ClickSend user name. If not provided through the command line, the tool will attempt to read this value from the environment varialble CLICKSEND_USER.',
+    describe: 'Your ClickSend user name.\n\nIf not provided through the command line, the tool will attempt to read this value from the environment varialble CLICKSEND_USER.\n',
     requiresArg: true,
     demandOption: false,
     type: 'string',
     group: 'ClickSend Connection Options:'
   })
   .option('cstoken', {
-    alias : ['cspassword', 'cspwd'],
-    describe: 'Your access token you generated for this tool. If not provided through the command line, the tool will attempt to read this value from the environment varialble CLICKSEND_TOKEN.',
+    describe: 'Your access token you generated for this tool.\n\nIf not provided through the command line, the tool will attempt to read this value from the environment varialble CLICKSEND_TOKEN.\n',
     requiresArg: true,
     demandOption: false,
     type: 'string',
     group: 'ClickSend Connection Options:'
   })
   .option('cshost', {
-    desc : 'The ClickSend host to which you wish to connect.',
+    desc : 'The ClickSend host to which you wish to connect.\n\n',
     default : 'rest.clicksend.com',
     type : 'string',
     group: 'ClickSend Connection Options:'
@@ -49,14 +51,14 @@ require('yargs/yargs')(hideBin(process.argv))
 
   .option('debug', {
     alias: 'D',
-    describe: 'Debugging level from 0 (default) to 5.  Where 0 is "off" and 5 is every possible message.',
+    describe: 'Debugging level from 0 to 5.  Where 0 is "off" and 5 is every possible message.\n',
     type: 'number',
     default : 0,
     group: 'Debug Options:'
   })
   .option( 'output', {
     alias : 'O',
-    describe : 'How the output from this command will be sent.',
+    describe : 'Where the output from this command will be sent.\n\nYou can specify multiple destinations.  If you specify \'none\' as an option, it will override any other output directives.\n',
     type : 'array',
     default : 'console',
     choices : [ 'console', 'file', 'none', 'debug', 'error' ],
@@ -64,16 +66,18 @@ require('yargs/yargs')(hideBin(process.argv))
   })
   .option( 'format', {
     alias : 'F',
-    desc : 'How to format the output',
+    desc : 'How to format the output\n\nNot thata \'object\' format does not work well being written to files and data written using this format is subject to data trucation in all cases, but it looks cool.\n',
     default : 'pretty',
     choices : ['pretty', 'raw', 'object' ],
     group: 'Output Options:'
   })
-  .option( 'fileName', {
-    alias : 'FN',
-    desc : 'When writing output to a file, this is the required file name.',
-    default : 'clicksend.json',
+  .option( 'file', {
+    desc : 'When writing output to a file, this is the file name to which to write.  If no directory is specified, the file will be created in the current directory.\n',
+    default : 'clicksend-output.json',
     group : 'Output Options:'
   })
-  .help()
-  .parse()
+  
+  .help( "help")
+  ;
+
+yargs.wrap(Math.min(120,yargs.terminalWidth())).parse();

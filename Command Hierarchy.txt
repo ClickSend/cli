@@ -156,10 +156,9 @@ clicksend
             update
             transfer
     sms
-        send
-        calculate
+        send        - Partially done (not all parameters supported)
+        calculate   - Partially done (not all parameters supported)
         cancel
-        test
         stats
 
         campaign

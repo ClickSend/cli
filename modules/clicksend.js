@@ -27,6 +27,7 @@ function getCSCredentials(yargs) {
 }
 
 async function executeGet(path, yargs) {
+    debug( 4, "Getting " + path, yargs );
     var basic = getBasic(getCSCredentials(yargs));
     var P = new Promise((resolve, reject) => {
         var options = {
@@ -69,15 +70,16 @@ async function executePostJSON( path, content, yargs ) {
     return await executePost( path, 'applicaiton/json', data, yargs );
 }
 
-async function executePost( path, contentType, content, yargs ) {
+async function executeSend( path, method, contentType, content, yargs ) {
 
-    debug( 4, "Sending POST to " + yargs.host + yargs.path, yargs );
+
+    debug( 4, "Sending " + method + " to " + yargs.host + yargs.path, yargs );
 
     var basic = getBasic(getCSCredentials(yargs));
 
     var P = new Promise((resolve, reject) => {
         var options = {
-            'method': 'POST',
+            'method': method,
             'hostname': yargs.cshost,
             'path': path,
             'headers': {
@@ -107,9 +109,9 @@ async function executePost( path, contentType, content, yargs ) {
             });
         });
 
-        debug( 5, "POST Options : ", yargs );
+        debug( 5, method + " Options : ", yargs );
         debug( 5, options, yargs );
-        debug( 5, "\nPOST Payload :", yargs );
+        debug( 5, "\n" + method + " Payload :", yargs );
         debug( 5,  content, yargs );
 
         req.write(content);
@@ -118,8 +120,19 @@ async function executePost( path, contentType, content, yargs ) {
     return P;
 }
 
+async function executePost( path, contentType, content, yargs ) {
+    return await executeSend( path, 'POST', contentType, content, yargs );
+}
+async function executePut( path, contentType, content, yargs ) {
+    return await executeSend( path, 'PUT', contentType, content, yargs );
+}
+
 function output( obj, yargs ) {
     var formatted = undefined;
+
+    if( yargs.output.includes( 'none' ) ) {
+        return;
+    }
 
     // format choices : ['pretty', 'raw', 'object' ],
     if( yargs.format === 'pretty' ) {
@@ -160,4 +173,4 @@ function debug( level, message, yargs ) {
     }
 }
 
-module.exports = { executeGet, executePost, executePostJSON, output, debug }
+module.exports = { executeGet, executePost, executePut, executePostJSON, output, debug }

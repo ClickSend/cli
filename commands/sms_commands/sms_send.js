@@ -20,7 +20,7 @@ exports.builder = function (yargs) {
             group: 'SMS Send Options:'
         })
         .option('from', {
-            describe: 'Your sender ID',
+            describe: 'Your sender ID.  If none specified, then a shared number is used.  If a non-phone-nuber is used, no reply option is available to the recipient.',
             type: 'string',
             requiresArg: true,
             demandOption: false,
