@@ -1,5 +1,6 @@
 const https = require('follow-redirects').https;
 const fs = require('fs');
+const ISO_DATE_TIME = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z)/;
 
 function getBasic(credentials) {
     var mix = credentials.username + ":" + credentials.token;
@@ -173,4 +174,8 @@ function debug( level, message, yargs ) {
     }
 }
 
-module.exports = { executeGet, executePost, executePut, executePostJSON, output, debug }
+function isISODate( str ) {
+
+}
+
+module.exports = { executeGet, executePost, executePut, executePostJSON, output, debug, isISODate }
