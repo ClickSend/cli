@@ -7,7 +7,6 @@ Installation
 Using Git
 > git clone https://github.com/ClickSend/cli.git
 > cd cli
-> git checkout 0.0.2
 > npm install
 > npm link
 

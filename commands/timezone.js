@@ -10,4 +10,3 @@ exports.handler = async function (yargs) {
     
     return result;
 }
-exports.hander = function (argv) { }

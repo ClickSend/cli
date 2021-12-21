@@ -33,6 +33,9 @@ exports.builder = function (yargs) {
             demandOption: true,
             group: 'SMS Send Options:'
         })
+        // .option('schedule', {
+        //     describe: "When to send this message, in ISO format.  e.g. 'YYYY-MM-DD HH:MM', where HH is in 24 hour format in your 
+        // }
 }
 
 exports.handler = async function (yargs) {
