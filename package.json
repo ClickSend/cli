@@ -1,6 +1,6 @@
 {
   "name": "cs",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "ClickSend CLI",
   "main": "index.js",
   "bin": {
