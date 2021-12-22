@@ -81,10 +81,6 @@ const yargs = require('yargs/yargs')(hideBin(process.argv))
     group : 'Output Options:',
     hidden : true
   })
-  .option( 'version', {
-    desc : 'Show the version number',
-    hidden : true
-  })
   
   .help( "help")
   ;
