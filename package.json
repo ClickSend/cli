@@ -1,8 +1,11 @@
 {
   "name": "cs",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "ClickSend CLI",
   "main": "index.js",
+  "bin": {
+    "clicksend": "index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,6 +27,7 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "follow-redirects": "^1.14.5",
+    "moment": "^2.29.1",
     "yargs": "^17.2.1"
   }
 }

@@ -1,0 +1,226 @@
+clicksend
+    account
+        create
+        get
+        usage
+        verification
+            get
+            send
+            password
+        forgot
+            username
+            password
+        balance
+            payment
+                get
+                update
+            recharge
+                get
+                purchase
+        transaction
+        subaccount
+            get
+            create
+            update
+            delete
+            key
+    contact
+        get
+            -- individual
+            -- list
+        create
+        update
+        copy
+        move
+        delete
+            -- individual
+            -- optouts
+        list
+            get
+                -- all
+                -- specific
+            update
+            delete
+            dedupe
+            upload
+            search (different api)
+    countries - DONE
+    email
+        tosms
+            allowed (email addresses)
+                get
+                add
+            rule
+                get
+                add
+                update
+                delete
+        allowed (allowed to send email I guess)
+            get
+                -- all
+                -- specific
+            create
+            delete
+            verify
+                -- send token
+                -- veryfiy token
+        campaign
+            send
+            calculate
+            get
+                -- One
+                -- All
+                -- History
+                -- Export (? as what?)
+            update
+            cancel
+        transactional
+            send
+            calculate
+            view
+                -- History
+                -- Export (? as what?)
+        rules
+            create
+            get
+                -- One
+                -- All
+            delete
+            update
+        template
+            get
+                -- all master / user 
+                -- specific master / user
+                -- template categories
+                -- template category
+                -- templates in category
+            create (user email template)
+            update (user email template)
+            delete (user email template)
+    fax
+        send
+        calculate
+        get
+            receipt
+                -- One
+                -- All
+            History
+        rules (type --inbound, --deliveryReceipt)
+            get
+                -- One
+                -- All
+            create
+            update
+            delete
+    mms
+        send
+        calculate
+        get
+            -- History
+            -- Export
+        campaign
+            send
+            calculate
+            update
+            cancel
+            get
+                -- All
+                -- One
+    number
+        get
+        buy
+    post
+        letter
+            send
+            calculate
+            cancel
+            get
+        postcard
+            send
+            calculate
+            cancel
+            get
+        address
+            detect
+            return
+                get
+                create
+                update
+                delete
+    referral
+        get
+    reseller
+        client
+            get
+            create
+            update
+            transfer
+    sms
+        send        - Partially done (not all parameters supported)
+        calculate   - Partially done (not all parameters supported)
+        cancel
+        stats
+
+        campaign
+            send
+            calculate
+            update
+            cancel
+            get
+        
+        inbound
+            get
+            test
+            mark
+
+            rules
+                get
+                create
+                update
+                delete
+
+        receipt
+            create
+            get
+            mark
+            test
+
+            rules
+                get
+                create
+                update
+                delete
+
+        history
+            -- get
+            -- export
+
+        template
+            create
+            get
+            update
+            delete 
+    voice
+        stats
+    media
+        upload
+    voice
+        send
+        calculate
+        languages
+        cancel
+        history
+        receipt
+            get
+            rules
+                create
+                get
+                update
+                delete
+    issues
+        get
+        create
+    timezones - DONE
+    
+    
+

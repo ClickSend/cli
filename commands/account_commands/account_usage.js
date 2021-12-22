@@ -1,8 +1,5 @@
-
-async function accountCommand(args) {
-    console.log( "Running...")
-}
-
+const yargs = require('yargs');
+const cs = require( './../../modules/clicksend.js')
 
 /**
  ** Exports for the command line processor
@@ -10,9 +7,6 @@ async function accountCommand(args) {
 
 exports.command = 'usage';
 exports.desc = "Get account usage statistics grouped by subaccount.";
-exports.handler = function( argv ) {
-    console.log( 'woopdie doo');
-}
 
 exports.builder = function(yargs){
     yargs
@@ -34,7 +28,10 @@ exports.builder = function(yargs){
     })
 }
 
-exports.handler = function(argv) {
-    console.log( 'Creating account for %s', argv.firstName)
+exports.handler = async function(yargs) {
+    let path = '/v3/account/usage/' + yargs.year + '/' + yargs.month + '/subaccount';
+    let result = await cs.executeGet( path, yargs );
+    cs.output( result, yargs );
+    return result;
 }
 
