@@ -26,7 +26,7 @@ exports.handler = async function (yargs) {
             result = new Array();
 
             for( let i = 0; i < yargs.messageId.length; i++ ) {
-                result.push( await cs.executePut( '/v3/sms/' + yargs.messageId[i] + '.cancel', 'application/json', '', yargs) );
+                result.push( await cs.executePut( '/v3/sms/' + yargs.messageId[i] + '/cancel', 'application/json', '', yargs) );
             }
         }
         else {
