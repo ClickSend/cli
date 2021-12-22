@@ -37,13 +37,13 @@ exports.builder = function (yargs) {
 exports.handler = async function (yargs) {
     try {
         // if we don't have a messages defined, grab them all
-        var result = {};
-        var outgoingQuery = "";
-        var incomingQuery = "";
-        var query = "";
+        let result = {};
+        let outgoingQuery = "";
+        let incomingQuery = "";
+        let query = "";
 
-        if (yargs.outgoing != undefined) {
-            for (var i = 0; i < yargs.outgoing.length; i++) {
+        if (yargs.outgoing) {
+            for (let i = 0; i < yargs.outgoing.length; i++) {
                 if (i > 0) {
                     outgoingQuery += ',';
                 }
@@ -51,8 +51,8 @@ exports.handler = async function (yargs) {
             }
         }
 
-        if (yargs.incoming != undefined) {
-            for (var i = 0; i < yargs.incoming.length; i++) {
+        if (yargs.incoming) {
+            for (let i = 0; i < yargs.incoming.length; i++) {
                 if (i > 0) {
                     incomingQuery += ',';
                 }
@@ -61,11 +61,11 @@ exports.handler = async function (yargs) {
         }
 
 
-        if (outgoingQuery != "" || incomingQuery != "") {
+        if (outgoingQuery || incomingQuery) {
             query = "?q="
         }
 
-        if (outgoingQuery != "") {
+        if (outgoingQuery) {
             query += outgoingQuery;
         }
 
@@ -88,7 +88,7 @@ exports.handler = async function (yargs) {
 
         if (yargs.read) {
             data = result.messages.data.data;
-            for (var i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 const readResult = await cs.executePut('/v3/sms/inbound-read/' + data[i].message_id, 'applicaiton/json', "", yargs);
                 readResult.message_id = data[i].message_id;
                 result.read.push(readResult);

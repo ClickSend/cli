@@ -39,11 +39,11 @@ exports.builder = function (yargs) {
 }
 
 exports.handler = async function (yargs) {
-    var payload = {}
+    let payload = {}
     payload.messages = new Array();
     if( Array.isArray(yargs.to)) {
-        for( var i = 0; i < yargs.to.length; i++ ) {
-            var message = {
+        for( let i = 0; i < yargs.to.length; i++ ) {
+            let message = {
                 to: yargs.to[i],
                 from: yargs.from,
                 source : 'CLI',
@@ -53,7 +53,7 @@ exports.handler = async function (yargs) {
         }
     }
     else {
-        var message = {
+        let message = {
             to: yargs.to,
             from: yargs.from,
             source : 'CLI',

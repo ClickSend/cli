@@ -20,11 +20,11 @@ exports.builder = function (yargs) {
 
 exports.handler = async function (yargs) {
 
-    var result = new Array();
+    let result = new Array();
 
     if( Array.isArray(yargs.messageId)) {
-        for( var i = 0; i < yargs.messageId.length; i++ ) {
-            var receipt = getReceipt( yargs.messageId[ i ], yargs );
+        for( let i = 0; i < yargs.messageId.length; i++ ) {
+            let receipt = getReceipt( yargs.messageId[ i ], yargs );
             result.push( receipt );
         }
     }

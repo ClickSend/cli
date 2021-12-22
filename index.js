@@ -46,7 +46,8 @@ const yargs = require('yargs/yargs')(hideBin(process.argv))
     desc : 'The ClickSend host to which you wish to connect.\n\n',
     default : 'rest.clicksend.com',
     type : 'string',
-    group: 'ClickSend Connection Options:'
+    group: 'ClickSend Connection Options:',
+    hidden : true
   })
 
   .option('debug', {
@@ -54,6 +55,7 @@ const yargs = require('yargs/yargs')(hideBin(process.argv))
     describe: 'Debugging level from 0 to 5.  Where 0 is "off" and 5 is every possible message.\n',
     type: 'number',
     default : 0,
+    hidden: true,
     group: 'Debug Options:'
   })
   .option( 'output', {
@@ -62,19 +64,26 @@ const yargs = require('yargs/yargs')(hideBin(process.argv))
     type : 'array',
     default : 'console',
     choices : [ 'console', 'file', 'none', 'debug', 'error' ],
-    group: 'Output Options:'
+    group: 'Output Options:',
+    hidden : true
   })
   .option( 'format', {
     alias : 'F',
     desc : 'How to format the output\n\nNot thata \'object\' format does not work well being written to files and data written using this format is subject to data trucation in all cases, but it looks cool.\n',
     default : 'pretty',
     choices : ['pretty', 'raw', 'object' ],
-    group: 'Output Options:'
+    group: 'Output Options:',
+    hidden : true
   })
   .option( 'file', {
     desc : 'When writing output to a file, this is the file name to which to write.  If no directory is specified, the file will be created in the current directory.\n',
     default : 'clicksend-output.json',
-    group : 'Output Options:'
+    group : 'Output Options:',
+    hidden : true
+  })
+  .option( 'version', {
+    desc : 'Show the version number',
+    hidden : true
   })
   
   .help( "help")

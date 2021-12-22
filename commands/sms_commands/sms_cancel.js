@@ -20,12 +20,12 @@ exports.builder = function (yargs) {
 
 exports.handler = async function (yargs) {
     try {
-        var result;
+        let result;
 
         if( yargs.messageId ) {
             result = new Array();
 
-            for( var i = 0; i < yargs.messageId.length; i++ ) {
+            for( let i = 0; i < yargs.messageId.length; i++ ) {
                 result.push( await cs.executePut( '/v3/sms/' + yargs.messageId[i] + '.cancel', 'application/json', '', yargs) );
             }
         }

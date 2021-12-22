@@ -1,5 +1,5 @@
 const yargs = require('yargs');
-const cs = require( '../../modules/clicksend.js')
+const cs = require( '../../modules/clicksend.js');
 
 /**
  ** Exports for the command line processor
@@ -12,8 +12,8 @@ exports.desc = "Get recharge transactions for this account";
 exports.builder = {}
 
 exports.handler = async function(yargs) {
-    var path = '/v3/recharge/transactions'
-    var result = await cs.executeGet( path, yargs );
+    let path = '/v3/recharge/transactions'
+    let result = await cs.executeGet( path, yargs );
     cs.output( result, yargs );
     return result;
 }

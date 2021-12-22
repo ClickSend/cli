@@ -29,8 +29,8 @@ exports.builder = function(yargs){
 }
 
 exports.handler = async function(yargs) {
-    var path = '/v3/account/usage/' + yargs.year + '/' + yargs.month + '/subaccount';
-    var result = await cs.executeGet( path, yargs );
+    let path = '/v3/account/usage/' + yargs.year + '/' + yargs.month + '/subaccount';
+    let result = await cs.executeGet( path, yargs );
     cs.output( result, yargs );
     return result;
 }

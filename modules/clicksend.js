@@ -3,8 +3,8 @@ const fs = require('fs');
 const ISO_DATE_TIME = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z)/;
 
 function getBasic(credentials) {
-    var mix = credentials.username + ":" + credentials.token;
-    var result =  Buffer.from(mix).toString('base64');
+    let mix = credentials.username + ":" + credentials.token;
+    let result =  Buffer.from(mix).toString('base64');
 
     return result;
 }
@@ -19,7 +19,7 @@ function getCSCredentials(yargs) {
         // get it from the environment
         yargs.cstoken = process.env.CLICKSEND_TOKEN
     }
-    var result = { 'username': yargs.csuser, 'token': yargs.cstoken }
+    let result = { 'username': yargs.csuser, 'token': yargs.cstoken }
     if( yargs.debug ) {
         console.debug( result );
     }
@@ -29,9 +29,9 @@ function getCSCredentials(yargs) {
 
 async function executeGet(path, yargs) {
     debug( 4, "Getting " + path, yargs );
-    var basic = getBasic(getCSCredentials(yargs));
-    var P = new Promise((resolve, reject) => {
-        var options = {
+    let basic = getBasic(getCSCredentials(yargs));
+    let P = new Promise((resolve, reject) => {
+        let options = {
             'method': 'GET',
             'hostname': yargs.cshost,
             'path': path,
@@ -42,16 +42,16 @@ async function executeGet(path, yargs) {
             'maxRedirects': 20
         };
 
-        var req = https.request(options, function (res) {
-            var chunks = [];
+        let req = https.request(options, function (res) {
+            let chunks = [];
 
             res.on("data", function (chunk) {
                 chunks.push(chunk);
             });
 
             res.on("end", function (chunk) {
-                var body = Buffer.concat(chunks).toString();;
-                var j = JSON.parse(body)
+                let body = Buffer.concat(chunks).toString();;
+                let j = JSON.parse(body)
                 resolve(j);
             });
 
@@ -76,10 +76,10 @@ async function executeSend( path, method, contentType, content, yargs ) {
 
     debug( 4, "Sending " + method + " to " + yargs.host + yargs.path, yargs );
 
-    var basic = getBasic(getCSCredentials(yargs));
+    let basic = getBasic(getCSCredentials(yargs));
 
-    var P = new Promise((resolve, reject) => {
-        var options = {
+    let P = new Promise((resolve, reject) => {
+        let options = {
             'method': method,
             'hostname': yargs.cshost,
             'path': path,
@@ -92,16 +92,16 @@ async function executeSend( path, method, contentType, content, yargs ) {
             'maxRedirects': 20
         };
 
-        var req = https.request(options, function (res) {
-            var chunks = [];
+        let req = https.request(options, function (res) {
+            let chunks = [];
 
             res.on("data", function (chunk) {
                 chunks.push(chunk);
             });
 
             res.on("end", function (chunk) {
-                var body = Buffer.concat(chunks).toString();;
-                var j = JSON.parse(body)
+                let body = Buffer.concat(chunks).toString();;
+                let j = JSON.parse(body)
                 resolve(j);
             });
 
@@ -129,7 +129,7 @@ async function executePut( path, contentType, content, yargs ) {
 }
 
 function output( obj, yargs ) {
-    var formatted = undefined;
+    let formatted = undefined;
 
     if( yargs.output.includes( 'none' ) ) {
         return;
@@ -158,7 +158,7 @@ function output( obj, yargs ) {
         console.error( formatted );
     }
     if( yargs.output.includes( 'file' ) ) {
-        var fileName = yargs.fileName
+        let fileName = yargs.fileName
         fs.writeFile( fileName, formatted.toString(), err => {
             if( err){
                 console.error(err);
